@@ -1,0 +1,45 @@
+.wanted { position: fixed; z-index: 55; top: 66px; right: var(--pad); display: flex; gap: 3px; font-size: 26px; line-height: 1; color: rgba(255, 246, 236, 0.22); -webkit-text-stroke: 1.5px #13061f; paint-order: stroke fill; filter: drop-shadow(0 2px 0 #13061f); pointer-events: none; }
+.wanted .on { color: #fff6ec; }
+.wanted.is-up .on { animation: starflash 0.32s steps(2) 6; }
+@keyframes starflash { 50% { color: rgba(255, 246, 236, 0.15); } }
+@media (max-width: 900px) { .wanted { top: 60px; font-size: 20px; } }
+
+/* red/blue police light sweeping the screen edges */
+.police { position: fixed; inset: 0; z-index: 70; pointer-events: none; animation: policeA 0.36s steps(1) 4, fadeOut 1.5s ease-out forwards; }
+@keyframes policeA {
+  0% { box-shadow: inset 90px 0 120px -40px rgba(255, 40, 60, 0.75), inset -90px 0 120px -40px rgba(40, 110, 255, 0.25); }
+  50% { box-shadow: inset 90px 0 120px -40px rgba(255, 40, 60, 0.25), inset -90px 0 120px -40px rgba(40, 110, 255, 0.8); }
+}
+@keyframes fadeOut { 0%, 60% { opacity: 1; } 100% { opacity: 0; } }
+
+.wtoast { position: fixed; z-index: 71; left: 50%; top: 96px; transform: translateX(-50%); display: grid; justify-items: center; gap: 4px; min-width: 280px; max-width: calc(100vw - 32px); padding: 14px 22px 16px; background: rgba(11, 6, 20, 0.88); border: 1px solid var(--line-strong); backdrop-filter: blur(8px); text-align: center; animation: toastIn 0.45s var(--ease), fadeOut 3s ease-out forwards; pointer-events: none; }
+.wtoast b.display { font-size: 30px; letter-spacing: 0.02em; color: var(--gold); text-shadow: 0 2px 0 #13061f; }
+.wtoast span { font-family: var(--f-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--cream); }
+.wtoast__stars { font-size: 22px; color: var(--cream); letter-spacing: 2px; }
+.wtoast__stars i { font-style: normal; color: rgba(255, 246, 236, 0.22); }
+.wtoast--busted { border-color: var(--err); }
+.wtoast--busted b.display { color: var(--err); font-size: 40px; }
+@keyframes toastIn { from { opacity: 0; transform: translate(-50%, -12px) scale(0.96); } }
+@media (prefers-reduced-motion: reduce) { .police { display: none; } .wanted.is-up .on { animation: none; } }
+
+/* MISSION PASSED overlay, styled after the San Andreas "Mission passed! Respect +" screen:
+   gold text with a heavy black outline in the middle of the screen, white "Respect +" under it,
+   no dark box, quick fade in, hold, fade out. Original recreation in CSS (no game assets). */
+.passed { position: fixed; inset: 0; z-index: 80; display: grid; place-content: center; justify-items: center; gap: 0; background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.12) 70%); cursor: pointer; text-align: center; padding: 20px; animation: sa-hold 4.2s linear forwards; }
+.passed__t { margin: 0; white-space: nowrap; font-family: var(--f-display); font-size: min(132px, 12.5vw); line-height: 1; letter-spacing: 0.01em; color: #d6a13a; background: linear-gradient(180deg, #f2cd6a 0%, #d6a13a 55%, #b9812a 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; -webkit-text-stroke: 0; filter: drop-shadow(3px 0 0 #000) drop-shadow(-3px 0 0 #000) drop-shadow(0 3px 0 #000) drop-shadow(0 -3px 0 #000) drop-shadow(3px 4px 0 #000); }
+.passed__r { margin: 6px 0 0; font-family: var(--f-display); font-size: clamp(30px, 4.6vw, 62px); line-height: 1; color: #f4f4f4; filter: drop-shadow(2px 0 0 #000) drop-shadow(-2px 0 0 #000) drop-shadow(0 2px 0 #000) drop-shadow(0 -2px 0 #000) drop-shadow(2px 3px 0 #000); }
+.passed__img { width: min(1100px, 92vw); height: auto; display: block; }
+.passed__s { position: fixed; left: 0; right: 0; bottom: 8vh; margin: 0; font-family: var(--f-mono); font-size: 12px; text-transform: uppercase; color: #fff; text-shadow: 0 1px 3px #000; opacity: 0.9; }
+@keyframes sa-hold { 0% { opacity: 0; } 6% { opacity: 1; } 88% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes passIn { from { opacity: 0; transform: scale(1.25); } }
+@keyframes fadeIn { from { opacity: 0; } }
+.has-passed .wtoast { display: none; }
+/* Mission passed (MissionPassed.jsx): smooth fade in, hold, fade out; background blur follows */
+.mp { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; cursor: pointer; padding: 0 4vw;
+  backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15) 70%);
+  animation: mpFade 4.4s ease-in-out forwards; }
+.mp__img { width: min(1100px, 92vw); max-width: none; height: auto; display: block; pointer-events: none; user-select: none; }
+.mp__s { position: absolute; left: 0; right: 0; bottom: 8vh; margin: 0; text-align: center; font-family: var(--f-mono); font-size: 12px; text-transform: uppercase; color: #fff; text-shadow: 0 1px 3px #000; }
+@keyframes mpFade { 0% { opacity: 0; } 14% { opacity: 1; } 82% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .mp { animation-duration: 4.4s; } }

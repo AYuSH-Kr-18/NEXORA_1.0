@@ -1,0 +1,82 @@
+/* ---------- Design tokens (Vice Sunset) ---------- */
+:root {
+  --ink: #0b0614;          /* near-black violet */
+  --ink-2: #1a0b2e;
+  --ink-3: #26103f;
+  --dusk: #2a0f4a;
+  --plum: #7a1f6e;
+  --rose: #e8466f;
+  --pink: #ff3d8b;
+  --orange: #ff7a3d;
+  --gold: #ffc56b;
+  --sun: #ffd27a;
+  --teal: #00c2c7;
+  --aqua: #3fe0d0;
+  --cream: #fff6ec;
+  --muted: rgba(255, 246, 236, 0.62);
+  --line: rgba(255, 246, 236, 0.22);
+  --line-strong: rgba(255, 246, 236, 0.55);
+  --ok: #3fe0a0;
+  --warn: #ffc56b;
+  --err: #ff5a6e;
+
+  --sunset: linear-gradient(180deg, #ffd27a 0%, #ff9a4a 32%, #ff3d8b 68%, #b0287e 100%);
+  --sunset-x: linear-gradient(90deg, #ffc56b, #ff7a3d 35%, #ff3d8b 70%, #c13aa0);
+
+  --f-display: 'Anton', 'Impact', sans-serif;
+  --f-script: 'Yellowtail', cursive;
+  --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --f-body: 'Inter Tight Variable', 'Inter Tight', system-ui, sans-serif;
+
+  --pad: clamp(16px, 2vw, 28px);
+  --maxw: 1280px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html, body { margin: 0; background: var(--ink); color: var(--cream); }
+body { font-family: var(--f-body); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img, svg, canvas { display: block; max-width: 100%; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+::selection { background: var(--pink); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--aqua); outline-offset: 3px; }
+
+.mono { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.25; }
+.display { font-family: var(--f-display); font-weight: 400; text-transform: uppercase; line-height: 0.88; letter-spacing: 0.005em; }
+.script { font-family: var(--f-script); font-weight: 400; }
+.sunset-text { background: var(--sunset); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.wrap { width: min(100% - 2 * var(--pad), var(--maxw)); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 0 22px; border: 1px solid var(--line-strong); background: transparent; color: var(--cream); font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s; }
+.btn:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+.btn--hot { background: var(--sunset-x); border-color: transparent; color: var(--ink); font-weight: 700; }
+.btn--hot:hover { filter: brightness(1.08); background: var(--sunset-x); color: var(--ink); }
+.btn[disabled] { opacity: 0.4; cursor: not-allowed; }
+.btn--sm { min-height: 34px; padding: 0 14px; font-size: 11px; }
+
+/* Corner-bracket frame used for HUD panels */
+.frame { position: relative; }
+.frame::before, .frame::after { content: ''; position: absolute; width: 10px; height: 10px; border-color: var(--line-strong); border-style: solid; pointer-events: none; }
+.frame::before { left: -1px; top: -1px; border-width: 1px 0 0 1px; }
+.frame::after { right: -1px; bottom: -1px; border-width: 0 1px 1px 0; }
+
+.stars { display: inline-flex; gap: 2px; color: var(--gold); letter-spacing: 0; }
+.stars .off { color: rgba(255, 246, 236, 0.22); }
+
+/* Forms */
+.field { display: grid; gap: 6px; }
+.field label { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.input { width: 100%; min-height: 48px; padding: 12px 14px; background: rgba(11, 6, 20, 0.6); border: 1px solid var(--line); border-radius: 0; color: var(--cream); font-size: 16px; transition: border-color 0.2s; }
+.input:focus { outline: none; border-color: var(--pink); box-shadow: 0 0 0 1px var(--pink); }
+.input[aria-invalid='true'] { border-color: var(--err); }
+.err { color: var(--err); font-size: 13px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+.frozen *, .frozen *::before, .frozen *::after { transition: none !important; animation: none !important; }
+.arw { font-family: var(--f-mono); font-variant-emoji: text; }

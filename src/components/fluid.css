@@ -1,0 +1,8 @@
+.fluid { position: fixed; inset: 0; z-index: 0; background: var(--ink); }
+.fluid__canvas { width: 100%; height: 100%; }
+.fluid__fallback { position: absolute; inset: 0; background: var(--ink); transition: opacity 1.2s var(--ease); }
+.fluid__fallback::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s var(--ease);
+  background:
+    radial-gradient(circle at 50% 52%, #ffe39a 0 13%, #ff8a4a 18%, transparent 30%),
+    linear-gradient(180deg, #26103f 0%, #7a1f6e 30%, #e8466f 52%, #ff7a3d 62%, #3a1450 66%, #0b0614 100%); }
+.fluid__fallback.is-revealed::before { opacity: 1; }

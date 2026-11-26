@@ -1,0 +1,16 @@
+.ach { position: fixed; z-index: 120; left: clamp(16px, 2vw, 28px); bottom: 74px; display: flex; align-items: center; gap: 12px; padding: 8px 16px 8px 8px; border-radius: 999px; background: #151518; border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); animation: achIn 0.55s cubic-bezier(0.16, 1, 0.3, 1), achOut 0.5s 3.3s ease forwards; max-width: calc(100vw - 2 * clamp(16px, 2vw, 28px)); }
+.ach__badge { font-size: 20px; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: #0a0a0b; flex: none; animation: achSpin 0.8s 0.15s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.ach__txt { display: grid; line-height: 1.25; min-width: 0; }
+.ach__txt b { font: 500 10px/1.2 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.ach__txt span { font: 600 15px/1.25 var(--f-mono); color: var(--cream); }
+.ach__txt i { font: 400 12px/1.3 var(--f-mono); font-style: normal; color: rgba(255,246,236,.62); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ach__n { font: 500 11px/1 var(--f-mono); color: rgba(255,246,236,.62); margin-left: 6px; }
+@keyframes achIn { from { opacity: 0; transform: translateY(16px) scale(0.96); } }
+@keyframes achOut { to { opacity: 0; transform: translateY(10px); } }
+@keyframes achSpin { from { transform: rotate(-120deg) scale(0.4); } }
+.cheat { position: fixed; inset: 0; z-index: 130; pointer-events: none; display: grid; place-items: center; animation: cheatFlash 1.4s ease forwards; background: radial-gradient(circle, rgba(255, 197, 107, 0.25), transparent 60%); }
+.cheat span { font: 300 clamp(28px, 4vw, 56px)/1 var(--f-mono); letter-spacing: 0.04em; color: var(--gold); }
+@keyframes cheatFlash { 0% { opacity: 0; } 15% { opacity: 1; } 100% { opacity: 0; } }
+html:has(.cheat) body { animation: shake 0.45s; }
+@keyframes shake { 20% { transform: translate(-4px, 2px); } 40% { transform: translate(4px, -2px); } 60% { transform: translate(-3px, 1px); } 80% { transform: translate(2px, -1px); } }
+@media (max-width: 760px) { .ach { bottom: auto; top: 78px; } .ach__txt i { display: none; } }
